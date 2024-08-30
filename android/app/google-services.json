@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830473395777",
+    "project_id": "action-engine-dev-2",
+    "storage_bucket": "action-engine-dev-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830473395777:android:4a38d54aa8ec73b36bb0c0",
+        "android_client_info": {
+          "package_name": "com.devnyamwange.action_engine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa9amKl5dCv45ZdzqE_bBfcGSqVMtHvBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
