@@ -1,3 +1,4 @@
+import 'package:action_engine/constants/app_fonts.dart';
 import 'package:action_engine/constants/routes.dart';
 import 'package:action_engine/widgets/custom_elevated_button.dart';
 import 'package:action_engine/widgets/custom_text_field.dart';
@@ -50,9 +51,23 @@ class _LoginViewState extends State<LoginView> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
-                  height: 200,
+                  height: 300,
                   child: Column(
                     children: [
+                      Text(
+                        'Action Engine',
+                        style: AppFonts.montserratBoldHeader,
+                      ),
+                      const WidgetSeparator(),
+                      const WidgetSeparator(),
+                      SizedBox(
+                        height: 1.0,
+                        child: Container(
+                          color: Colors.black38,
+                        ),
+                      ),
+                      const WidgetSeparator(),
+                      const WidgetSeparator(),
                       CustomTextField(
                         controller: _email,
                         keyboardType: TextInputType.emailAddress,
@@ -74,6 +89,13 @@ class _LoginViewState extends State<LoginView> {
                         prefixIcon: const Icon(Icons.password_outlined),
                       ),
                       const WidgetSeparator(),
+                      const WidgetSeparator(),
+                      SizedBox(
+                        height: 1.0,
+                        child: Container(
+                          color: Colors.black38,
+                        ),
+                      ),
                       const WidgetSeparator(),
                       //login button
                       CustomElevatedButton(
