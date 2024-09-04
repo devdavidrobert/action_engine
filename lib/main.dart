@@ -3,6 +3,8 @@ import 'package:action_engine/views/home_page.dart';
 import 'package:action_engine/views/login_page.dart';
 import 'package:action_engine/views/register_page.dart';
 import 'package:action_engine/views/test.dart';
+import 'package:action_engine/views/test_table.dart';
+import 'package:action_engine/widgets/navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +22,9 @@ void main() async {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     ),
-    home: const LoginView(),
+    home: const NavigationBarView(),
     routes: {
-      testRoute: (context) => const testPage(),
+      testRoute: (context) => const TestPage(),
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
       homeRoute: (context) => const HomeView(),

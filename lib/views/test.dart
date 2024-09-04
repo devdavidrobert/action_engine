@@ -1,133 +1,67 @@
-import 'package:action_engine/constants/app_fonts.dart';
-import 'package:action_engine/widgets/widget_separator.dart';
+import 'package:action_engine/views/call_list.dart';
+import 'package:action_engine/views/dashboard.dart';
+// import 'package:action_engine/views/call_list_page.dart';
+import 'package:action_engine/views/follow_ups_page.dart';
+import 'package:action_engine/views/home_page.dart';
+import 'package:action_engine/views/test_table.dart';
+// import 'package:action_engine/views/follow_ups_view.dart';
 import 'package:flutter/material.dart';
 
-class testPage extends StatefulWidget {
-  const testPage({super.key});
+class TestPage extends StatefulWidget {
+  const TestPage({super.key});
 
   @override
-  State<testPage> createState() => _testPageState();
+  State<TestPage> createState() => _TestPageState();
 }
 
-class _testPageState extends State<testPage> {
+class _TestPageState extends State<TestPage> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        children: [
-          SizedBox(
-            width: 200,
-            child: Container(
-              color: Colors.grey.shade100,
-              child: Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Action Engine',
-                          style: AppFonts.montserratBoldHeader,
-                        ),
-                        const WidgetSeparator(),
-                        const WidgetSeparator(),
-                        const WidgetSeparator(),
-                        const WidgetSeparator(),
-                        const WidgetSeparator(),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Dashboard',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Call List',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Follow-up',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Ureachable',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Promised to Pay',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                        const WidgetSeparator(),
-                        Material(
-                          child: ListTile(
-                            title: const Text(
-                              'Earning and Perfomance',
-                            ),
-                            titleTextStyle: AppFonts.montserratBold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ListTile(
-                          title: const Text(
-                            'Settings',
-                          ),
-                          titleTextStyle: AppFonts.montserratRegular,
-                        ),
-                        ListTile(
-                          title: const Text(
-                            'Logout',
-                          ),
-                          titleTextStyle: AppFonts.montserratRegular,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+        children: <Widget>[
+          // Create a navigation rail
+          NavigationRail(
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            labelType: NavigationRailLabelType.selected,
+            backgroundColor: Colors.green,
+            destinations: const <NavigationRailDestination>[
+              // Navigation destinations
+              NavigationRailDestination(
+                icon: Icon(Icons.favorite_border),
+                selectedIcon: Icon(Icons.favorite),
+                label: Text('Wishlist'),
               ),
-            ),
+              NavigationRailDestination(
+                icon: Icon(Icons.person_outline_rounded),
+                selectedIcon: Icon(Icons.person),
+                label: Text('Account'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.shopping_cart_outlined),
+                selectedIcon: Icon(Icons.shopping_cart),
+                label: Text('Cart'),
+              ),
+            ],
+            selectedIconTheme: const IconThemeData(color: Colors.white),
+            unselectedIconTheme: const IconThemeData(color: Colors.black),
+            selectedLabelTextStyle: const TextStyle(color: Colors.white),
           ),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Column 2',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10),
-                Text('Item A'),
-                Text('Item B'),
-                Text('Item C'),
-              ],
+          const VerticalDivider(thickness: 1, width: 2),
+          Expanded(
+            child: Center(
+              child: _selectedIndex == 0
+                  ? const DashboardPage()
+                  : _selectedIndex == 1
+                      ? const CallListPage()
+                      : const HomeView(),
             ),
           ),
         ],
@@ -138,6 +72,6 @@ class _testPageState extends State<testPage> {
 
 void main() {
   runApp(const MaterialApp(
-    home: testPage(),
+    home: TestPage(),
   ));
 }
