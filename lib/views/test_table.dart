@@ -20,7 +20,7 @@ class _testPage_State extends State<testPage_> {
             child: Container(
               color: Colors.grey.shade100,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -140,7 +140,7 @@ class _testPage_State extends State<testPage_> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   SizedBox(
                     height: 1.0,
                     child: Container(
