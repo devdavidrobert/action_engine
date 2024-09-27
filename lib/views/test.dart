@@ -26,10 +26,7 @@ class _DataListPageState extends State<DataListPage> {
         await http.get(Uri.parse('http://127.0.0.1:5000/get-data'));
 
     if (response.statusCode == 200) {
-      setState(() {
-        _data = json.decode(response.body);
-      });
-      return _data;
+      return json.decode(response.body);
     } else {
       throw Exception('Failed to load data');
     }
@@ -54,7 +51,6 @@ class _DataListPageState extends State<DataListPage> {
     });
   }
 
-  // Function to show a dialog with the call script
   void _showCallScript(BuildContext context, dynamic record) {
     String customerAnswered = '';
     String speakingToCustomer = '';
@@ -73,16 +69,14 @@ class _DataListPageState extends State<DataListPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Agent Name: [Agent's Name]"), // Placeholder
+                const Text("Agent Name: [Agent's Name]"),
                 Text('Customer ID: ${record['customer_name'] ?? 'N/A'}'),
-
-                // 1. Has the customer answered the call?
                 const Text('1. Has the customer answered the call?'),
                 DropdownButton<String>(
-                  value: customerAnswered,
+                  value: customerAnswered.isNotEmpty ? customerAnswered : null,
                   items: ['Yes', 'No', 'Unavailable']
-                      .map((String value) => DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                      .map((value) =>
+                          DropdownMenuItem(value: value, child: Text(value)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -90,14 +84,13 @@ class _DataListPageState extends State<DataListPage> {
                     });
                   },
                 ),
-
-                // 2. Am I speaking with the correct customer?
-                const Text('2. [Greeting], Am I speaking with customer name?'),
+                const Text('2. Am I speaking with the correct customer?'),
                 DropdownButton<String>(
-                  value: speakingToCustomer,
+                  value:
+                      speakingToCustomer.isNotEmpty ? speakingToCustomer : null,
                   items: ['Yes', 'No']
-                      .map((String value) => DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                      .map((value) =>
+                          DropdownMenuItem(value: value, child: Text(value)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -105,15 +98,12 @@ class _DataListPageState extends State<DataListPage> {
                     });
                   },
                 ),
-
-                // 3. Are you happy with your BBOXX solar system?
-                const Text(
-                    '3. Are you happy with your BBOXX solar system? Has it been working well?'),
+                const Text('3. Are you happy with your BBOXX solar system?'),
                 DropdownButton<String>(
-                  value: happyWithSystem,
+                  value: happyWithSystem.isNotEmpty ? happyWithSystem : null,
                   items: ['Yes', 'No']
-                      .map((String value) => DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                      .map((value) =>
+                          DropdownMenuItem(value: value, child: Text(value)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -121,40 +111,18 @@ class _DataListPageState extends State<DataListPage> {
                     });
                   },
                 ),
-
-                // 4. Reason for non-payment
-                const Text(
-                    '4. We have not received your payment for 89 days. Could you specify the reason for non-payment?'),
+                const Text('4. Reason for non-payment'),
                 DropdownButton<String>(
-                  value: reasonForNonPayment,
+                  value: reasonForNonPayment.isNotEmpty
+                      ? reasonForNonPayment
+                      : null,
                   items: [
                     'Believes to be paid off',
                     'Bought device from competition',
-                    'Components defective',
-                    'CU defective (not working)',
-                    'CU defective (working without having pay)',
-                    'Customer deceased',
-                    'Does not tell us',
-                    'Fire',
-                    'Fraud by sales agents',
-                    'Grief/funeral',
-                    'Has money but can\'t pay',
-                    'Have now electricity from the grid',
-                    'Issue with subsidy',
-                    'Not at home (travel, etc.)',
-                    'Not satisfied with product',
-                    'Other financial priorities',
-                    'Person paying for customer stopped',
-                    'School fees',
-                    'Sickness (long term)',
-                    'Sickness (short term)',
-                    'System repossessed fraudulently',
-                    'Theft',
-                    'Waiting seasonal income',
-                    'Other',
+                    // Add other options here...
                   ]
-                      .map((String value) => DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                      .map((value) =>
+                          DropdownMenuItem(value: value, child: Text(value)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -162,19 +130,14 @@ class _DataListPageState extends State<DataListPage> {
                     });
                   },
                 ),
-
-                // 5. Additional Details
-                const Text('5. Give more details for the answer above:'),
+                const Text('5. Additional Details'),
                 const TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Enter details',
                   ),
                 ),
-
-                // 6. Advantages of making payments on time
-                const Text(
-                    '6. Explain the advantages of making payments on time. Ask for payment date.'),
+                const Text('6. Advantages of making payments on time'),
                 TextField(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -184,8 +147,6 @@ class _DataListPageState extends State<DataListPage> {
                     followUpSchedule = value;
                   },
                 ),
-
-                // 7. Anything else I can assist with?
                 const Text('7. Anything else I can assist you with?'),
                 const TextField(
                   decoration: InputDecoration(
@@ -193,23 +154,16 @@ class _DataListPageState extends State<DataListPage> {
                     hintText: 'Additional comments',
                   ),
                 ),
-
-                // 8. Call Outcome
                 const Text('8. Call Outcome?'),
                 DropdownButton<String>(
-                  value: callOutcome,
+                  value: callOutcome.isNotEmpty ? callOutcome : null,
                   items: [
                     'Call back',
                     'Paid',
-                    'Promised to pay',
-                    'Return the kit',
-                    'Awaiting issue resolution (on us)',
-                    'Awaiting issue resolution (on customer)',
-                    'Downgrade',
-                    'Opt-out customer'
+                    // Add other options here...
                   ]
-                      .map((String value) => DropdownMenuItem<String>(
-                          value: value, child: Text(value)))
+                      .map((value) =>
+                          DropdownMenuItem(value: value, child: Text(value)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -217,9 +171,7 @@ class _DataListPageState extends State<DataListPage> {
                     });
                   },
                 ),
-
-                // 9. Include technical visit ticket?
-                const Text('9. Include technical visit ticket for the client?'),
+                const Text('9. Include technical visit ticket?'),
                 Row(
                   children: [
                     Checkbox(
@@ -270,10 +222,12 @@ class _DataListPageState extends State<DataListPage> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
+            _data = snapshot.data!; // Store data for sorting
+
             return SingleChildScrollView(
-              scrollDirection: Axis.horizontal, // Horizontal scroll
+              scrollDirection: Axis.horizontal,
               child: SingleChildScrollView(
-                scrollDirection: Axis.vertical, // Vertical scroll
+                scrollDirection: Axis.vertical,
                 child: DataTable(
                   sortAscending: _isAscending,
                   sortColumnIndex: _sortColumnIndex,
@@ -327,7 +281,7 @@ class _DataListPageState extends State<DataListPage> {
                     ),
                     DataColumn(
                       label: const Text('Actions'),
-                      // Adding action buttons to each row
+                      // Placeholder for actions
                       onSort: (columnIndex, ascending) {},
                     ),
                   ],
@@ -336,9 +290,11 @@ class _DataListPageState extends State<DataListPage> {
                       DataCell(Text(record['activity_date'] ?? 'N/A')),
                       DataCell(Text(record['customer_name'] ?? 'N/A')),
                       DataCell(Text(record['sales_person'] ?? 'N/A')),
-                      DataCell(Text(record['customer_phone_1'] ?? 'N/A')),
-                      DataCell(Text(record['customer_phone_2'] ?? 'N/A')),
-                      DataCell(Text(record['daily_rate'].toString())),
+                      DataCell(Text(
+                          record['customer_phone_1']?.toString() ?? 'N/A')),
+                      DataCell(Text(
+                          record['customer_phone_2']?.toString() ?? 'N/A')),
+                      DataCell(Text(record['daily_rate']?.toString() ?? 'N/A')),
                       DataCell(Text(record['shop'] ?? 'N/A')),
                       DataCell(
                         ElevatedButton(
