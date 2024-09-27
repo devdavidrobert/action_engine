@@ -1,6 +1,7 @@
 import 'package:action_engine/constants/app_fonts.dart';
 import 'package:action_engine/views/call_list.dart';
 import 'package:action_engine/views/home_page.dart';
+import 'package:action_engine/views/test.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarView extends StatefulWidget {
@@ -85,7 +86,7 @@ class _NavigationBarViewState extends State<NavigationBarView> {
               child: Center(
                   child: _selectedIndex == 0
                       ? const HomeView()
-                      : const CallListPage()))
+                      : const DataListPage()))
         ],
       ),
     );

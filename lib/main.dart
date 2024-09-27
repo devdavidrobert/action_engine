@@ -21,9 +21,9 @@ void main() async {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     ),
-    home: const LoginView(),
+    home: const DataListPage(),
     routes: {
-      testRoute: (context) => const TestPage(),
+      testRoute: (context) => const DataListPage(),
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
       homeRoute: (context) => const NavigationBarView(),
