@@ -1,5 +1,5 @@
 import 'package:action_engine/constants/routes.dart';
-import 'package:action_engine/views/home_page.dart';
+// import 'package:action_engine/views/home_page.dart';
 import 'package:action_engine/views/login_page.dart';
 import 'package:action_engine/views/register_page.dart';
 import 'package:action_engine/views/test.dart';
@@ -21,12 +21,12 @@ void main() async {
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       useMaterial3: true,
     ),
-    home: const NavigationBarView(),
+    home: const LoginView(),
     routes: {
       testRoute: (context) => const TestPage(),
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      homeRoute: (context) => const HomeView(),
+      homeRoute: (context) => const NavigationBarView(),
       // verRoute: (context) => const VerifyEmailView(),
     },
   ));
